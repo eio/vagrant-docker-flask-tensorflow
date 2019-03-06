@@ -1,20 +1,29 @@
-## server/app.py
-from flask import Flask, jsonify, request
-from sklearn import svm
-from sklearn import datasets
-from sklearn.externals import joblib
+# server/app.py
+from __future__ import absolute_import, division, print_function
+import tensorflow as tf
+from tensorflow import keras
+from flask import Flask, request, redirect, jsonify
+from werkzeug.utils import secure_filename
+import os
+import base64
+import numpy as np
+# import matplotlib.pyplot as plt
 import redis
 import time
 
 # declare constants
 HOST = '0.0.0.0'
 PORT = 8081
+REDIS_PORT = 6379
+CLASS_NAMES = ['0','1','2','3','4','5','6','7','8','9']
+HERE = os.path.dirname(os.path.abspath(__file__))
+MNIST_MODEL_FILEPATH = '{}/../models/mnist_model.h5'.format(HERE)
 
 # initialize flask application
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='{}/../www'.format(HERE))
 
 # initialize redis store
-cache = redis.Redis(host='redis', port=6379)
+cache = redis.Redis(host='redis', port=REDIS_PORT)
 
 def get_hit_count():
     retries = 5
@@ -27,36 +36,52 @@ def get_hit_count():
             retries -= 1
             time.sleep(0.5)
 
-
 @app.route('/')
 def hello():
     count = get_hit_count()
     parameters = request.get_json()
     return 'Hello World! I have been seen {} times.\n'.format(count)
 
-# ML API
-@app.route('/api/train', methods=['POST'])
-def train():
-    # get parameters from request
-    parameters = request.get_json()
-    
-    # read iris data set
-    iris = datasets.load_iris()
-    X, y = iris.data, iris.target
+@app.route('/digi')
+def servit():
+    return app.send_static_file('index.html')
 
-    # fit model
-    C_param = parameters['C']
-    clf = svm.SVC(C=float(C_param),
-                  probability=True,
-                  random_state=1)
-    clf.fit(X, y)
-    # persist model
-    joblib.dump(clf, 'model.pkl')
-    return jsonify({'accuracy': round(clf.score(X, y) * 100, 2), 'C': C_param })
+@app.route('/api/predict', methods=['POST'])
+def predict_digit():
+    # get input data
+    data = request.get_json()
+    # decode the base64 encoded image
+    decoded = base64.b64decode(data['b64img'])
+    # create 1D numpy array from binary data string
+    img = np.frombuffer(decoded, dtype=np.uint8)
+    # reshape 1D array into 28x28 matrix
+    img = img.reshape(28,28)
+    # add image data to a batch where it's the only member
+    img_batch = (np.expand_dims(img,0))
+    # load our pre-trained MNIST model
+    model = keras.models.load_model(MNIST_MODEL_FILEPATH)
+    # make prediction
+    predictions_single = model.predict(img_batch)
+    prediction = predictions_single[0]
+    predicted = np.argmax(prediction)
+    percent_confident = 100*np.max(prediction)
+    confidence = '{:2.0f}%'.format(percent_confident)
+    # # display test image and prediction
+    # plt.figure()
+    # plt.imshow(img, cmap='gray')
+    # plt.xlabel("Prediction: {} (Confidence: {})".format(CLASS_NAMES[predicted], confidence))
+    # plt.show()
+    # return prediction to client
+    return jsonify({
+        'prediction': CLASS_NAMES[predicted],
+        'confidence': confidence
+    })
 
 if __name__ == '__main__':
     # run web server
-    app.run(host=HOST,
-            debug=True,  # automatic reloading enabled
-            port=PORT)
-
+    app.run(
+        host=HOST,
+        port=PORT,
+        # automatic reloading enabled
+        debug=True
+    )

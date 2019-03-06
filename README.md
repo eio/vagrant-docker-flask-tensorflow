@@ -17,9 +17,11 @@ Install Vagrant plugins:
 
 # Verify working
 
-Test POST:
+Test POSTs:
 
-	scripts/testcurl.sh
+	scripts/curl_post_zero.sh
+
+	scripts/curl_post_three.sh
 
 Test GET index in browser:
 
@@ -32,6 +34,7 @@ List running Docker containers:
 
 Maybe get shell on a container:
 
+	vagrant ssh
 	scripts/shelldock.sh $CONTAINER_ID
 
 # Reference
@@ -64,3 +67,19 @@ https://docs.docker.com/compose/gettingstarted/
 ## Faster builds
 
 https://medium.com/google-cloud/deploying-scipy-numpy-with-docker-205e9afac3b0
+
+# More Resources
+
+### Basic classification NN with Tensorflow
+
+	https://github.com/tensorflow/docs/blob/master/site/en/tutorials/keras/basic_classification.ipynb
+
+### Saving, loading, and serving Tensorflow models
+
+	https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tutorials/keras/save_and_restore_models.ipynb?hl=es-MX
+
+### User-drawn MNIST images
+
+	https://codepen.io/MaciejCaputa/pen/KXbJWR
+
+

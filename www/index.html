@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Digit Predictor</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    </head>
+    <body>
+        <script type="text/javascript" src="js/predict.js"></script>
+        <h1>Handwritten Canvas Input to MNIST Input Converter</h1>
+        <p>Convert any size canvas based input into 20x20 pixel bounding box<br>centered on 28x28 canvas as per MNIST specification.</p>
+        <div class="items">
+            <div class="items__item">
+                <canvas id="original" width="100px" height="200px"></canvas>
+                <div class="items__item__label">Canvas Input</div>
+            </div>
+            <div class="items__arrow"></div>
+            <div class="items__item">
+                <canvas id="bounded" width="100px" height="100px"></canvas>
+                <div class="items__item__label">Segmented</div>
+            </div>
+            <div class="items__arrow"></div>
+            <div class="items__item items__item--mnist">
+                <canvas id="mnist" width="28px" height="28px"></canvas>
+                <div class="items__item__label">MNIST Input</div>
+                <br>
+                <button type="button" onclick="requestPrediction()">Predict</button>
+            </div>
+            <!--
+            <div class="items__arrow"></div>
+            <div class="items__item items__item--digit">
+                <canvas id="mnist" width="100px" height="100px"></canvas>
+                <div class="items__item__label">Recognised Output</div>
+            </div>
+            -->
+        </div>
+        <!-- canvas sketchpad code -->
+        <script type="text/javascript" src="js/mnist-canvas.js"></script>
+    </body>
+</html>
