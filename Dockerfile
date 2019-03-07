@@ -8,4 +8,4 @@ RUN apt-get update \
     && pip3 --version \
     && pip3 install --no-cache-dir -r requirements.txt
 
-CMD ["python3", "server/app.py"]
+CMD ["python3", "app/app.py"]

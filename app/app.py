@@ -2,14 +2,17 @@
 from __future__ import absolute_import, division, print_function
 import tensorflow as tf
 from tensorflow import keras
-from flask import Flask, request, redirect, jsonify
-from werkzeug.utils import secure_filename
+from flask import Flask, request, redirect, jsonify, render_template
+from jinja2 import TemplateNotFound
 import os
 import base64
 import numpy as np
 # import matplotlib.pyplot as plt
 import redis
 import time
+
+from flask import Blueprint, render_template, abort
+from jinja2 import TemplateNotFound
 
 # declare constants
 HOST = '0.0.0.0'
@@ -20,7 +23,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 MNIST_MODEL_FILEPATH = '{}/../models/mnist_model.h5'.format(HERE)
 
 # initialize flask application
-app = Flask(__name__, static_url_path='{}/../www'.format(HERE))
+app = Flask(__name__)
 
 # initialize redis store
 cache = redis.Redis(host='redis', port=REDIS_PORT)
@@ -40,11 +43,11 @@ def get_hit_count():
 def hello():
     count = get_hit_count()
     parameters = request.get_json()
-    return 'Hello World! I have been seen {} times.\n'.format(count)
+    return 'Hello Worldy World! I have been seen {} times.\n'.format(count)
 
 @app.route('/digi')
 def servit():
-    return app.send_static_file('index.html')
+    return render_template('index.html')
 
 @app.route('/api/predict', methods=['POST'])
 def predict_digit():

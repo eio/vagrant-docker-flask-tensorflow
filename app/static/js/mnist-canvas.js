@@ -1,3 +1,5 @@
+// Original MNIST canvas code taken from: https://codepen.io/MaciejCaputa/pen/KXbJWR
+
 /**
  * 1. Image is centered by computing center of a mass.
  * 2. Then it is scale down into 20x20 frame
