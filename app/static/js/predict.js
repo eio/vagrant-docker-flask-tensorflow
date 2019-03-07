@@ -29,11 +29,10 @@ var requestPrediction = function() {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
-            console.log(xhr)
-            // console.log(xhr.response)
-            // var resp = JSON.parse(xhr.response);
-            // console.log(resp)
-            // alert('Prediction:', resp.prediction);
+            var resp = JSON.parse(xhr.response);
+            console.log('Prediction:', resp)
+            // resp == { 'prediction': X, 'confidence': Y }
+            alert('skynet is ' + resp['confidence'] + ' sure that you drew the number ' + resp['prediction']);
         }
     }
     xhr.open('POST', endpoint, true);

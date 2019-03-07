@@ -57,3 +57,14 @@ p {
 canvas {
   border: 1px solid black;
 }
+
+button {
+  cursor: pointer;
+  border: 2px solid black;
+  background: #fff;
+  color: #000;
+}
+
+button:hover {
+  background: #111;
+}
