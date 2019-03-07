@@ -42,11 +42,7 @@ def get_hit_count():
 @app.route('/')
 def hello():
     count = get_hit_count()
-    parameters = request.get_json()
-    return 'Hello Worldy World! I have been seen {} times.\n'.format(count)
-
-@app.route('/digi')
-def servit():
+    print('Hi my log I have been seen {} times.'.format(count))
     return render_template('index.html')
 
 @app.route('/api/predict', methods=['POST'])

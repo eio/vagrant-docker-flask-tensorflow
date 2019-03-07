@@ -6,8 +6,8 @@
     </head>
     <body>
         <script type="text/javascript" src="{{ url_for('static', filename='js/predict.js') }}"></script>
-        <h1>Handwritten Canvas Input to MNIST Input Converter</h1>
-        <p>Convert any size canvas based input into 20x20 pixel bounding box<br>centered on 28x28 canvas as per MNIST specification.</p>
+        <h1>tensorflow neural network model classifies hand-drawn digits</h1>
+        <p>Draw a single number in the box on the left<br>0, 1, 2, 3, 4, 5, 6, 7, 8, or 9.</p>
         <div class="items">
             <div class="items__item">
                 <canvas id="original" width="100px" height="200px"></canvas>

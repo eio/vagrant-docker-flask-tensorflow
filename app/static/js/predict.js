@@ -20,28 +20,24 @@ var getGrayscaleArray = function() {
 };
 
 var requestPrediction = function() {
-    var endpoint = 'http://127.0.0.1:8081/api/predict';
+    var endpoint = 'http://192.168.188.110:8081/api/predict';
     var gsarr = getGrayscaleArray();
-    // console.log(String(gsarr))
     var b64encoded = btoa(String.fromCharCode.apply(null, gsarr));
     var data = {
         'b64img': b64encoded
     };
-    console.log(data);
-    // construct an HTTP request
     var xhr = new XMLHttpRequest();
-    // callback on response
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
-            console.log(xhr.response)
-            var resp = JSON.parse(xhr.response);
-            console.log(resp)
-            alert('Prediction:', resp.prediction);
+            console.log(xhr)
+            // console.log(xhr.response)
+            // var resp = JSON.parse(xhr.response);
+            // console.log(resp)
+            // alert('Prediction:', resp.prediction);
         }
     }
     xhr.open('POST', endpoint, true);
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-    // send the collected data as JSON
     var payload = JSON.stringify(data);
     xhr.send(payload);
 };
