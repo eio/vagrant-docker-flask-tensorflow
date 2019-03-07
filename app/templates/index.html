@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Digit Predictor</title>
+        <title>DigitPredictor</title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
     </head>
     <body>
         <script type="text/javascript" src="{{ url_for('static', filename='js/predict.js') }}"></script>
-        <h1>tensorflow neural network model classifies hand-drawn digits</h1>
-        <p>Draw a single number in the box on the left<br>0, 1, 2, 3, 4, 5, 6, 7, 8, or 9.</p>
+        <h1>tensorflow neural network model:
+            <span style='font-size:80%;'>
+                classify hand-drawn numbers
+            </span>
+        </h1>
+        <p>Draw a single number in the box on the left:
+            <br>0, 1, 2, 3, 4, 5, 6, 7, 8, or 9.
+            <br>
+            <br>then click the Predict button.
+        </p>
         <div class="items">
             <div class="items__item">
                 <canvas id="original" width="100px" height="200px"></canvas>
@@ -23,7 +31,9 @@
                 <canvas id="mnist" width="28px" height="28px"></canvas>
                 <div class="items__item__label">MNIST Input</div>
                 <br>
-                <button type="button" onclick="requestPrediction()">Predict</button>
+                <div class="wrap">
+                  <button class="button" onclick="requestPrediction()">Predict</button>
+                </div>
             </div>
             <!--
             <div class="items__arrow"></div>
@@ -36,6 +46,6 @@
         <!-- canvas sketchpad code -->
         <script type="text/javascript" src="{{ url_for('static', filename='js/mnist-canvas.js') }}"></script>
         <!-- clear canvas button -->
-        <button type="button" onclick="sketcher.clear()">Clear</button>
+        <button id="clearButton" type="button" onclick="sketcher.clear()">Clear</button>
     </body>
 </html>
