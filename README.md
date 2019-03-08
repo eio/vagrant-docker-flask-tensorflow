@@ -15,6 +15,15 @@ Install Vagrant plugins:
 
 ^ this will take awhile the first time
 
+# Auto rsync between host and VM
+
+	vagrant rsync-auto
+
+^ this command watcues all files in the host machine's top-level project directory
+if a change is made, an automatic rsync will update files in the VM's `/vagrant/` directory
+
+`vagrant rsync` can be used for a one-off file sync
+
 # Verify working
 
 Test POSTs:

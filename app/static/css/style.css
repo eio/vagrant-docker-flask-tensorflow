@@ -58,23 +58,19 @@ canvas {
   border: 1px solid black;
 }
 
+canvas#mnist {
+  margin-left: 50px;
+}
+
 button {
   cursor: pointer;
-  border: 2px solid black;
-  background: #fff;
-  color: #000;
 }
 button:focus {
   outline:0;
 }
-button:active {
-  color: #7d7d7d;
-  border: 2px solid #7d7d7d;
-  box-shadow: 5px 10px #a9a9a9:
-}
 
 #clearButton {
-  margin-left: -400px;
+  margin-left: -444px;
 }
 
 /* the following button style was lifted from:
@@ -86,6 +82,11 @@ button:active {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+button {
+  font-family: 'Roboto', sans-serif;
+  font-size: 11px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 }
 .button {
   width: 140px;
