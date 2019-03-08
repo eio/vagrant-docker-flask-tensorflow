@@ -15,36 +15,37 @@ Install Vagrant plugins:
 
 ^ this will take awhile the first time
 
-# Automatically sync files between host and VM
-
-	vagrant rsync-auto
-
-^ this command watches all files in the host machine's top-level project directory
-if a change is made, an automatic rsync will update files in the VM's `/vagrant/` directory
-
-`vagrant rsync` can be used for a one-off file sync
-
 # Verify things are working
 
 Test POSTs:
 
-	scripts/curl_post_zero.sh
+	./scripts/curl_post_zero.sh
 
-	scripts/curl_post_three.sh
+	./scripts/curl_post_three.sh
 
 Test GET index in browser:
 
 	http://192.168.188.110:8081
 
-List running Docker containers:
+List running Docker containers from the VM:
 
 	vagrant ssh
 	docker ps
 
-Maybe get shell on a container:
+Maybe get shell on a container through the VM:
 
 	vagrant ssh
 	scripts/shelldock.sh $CONTAINER_ID
+
+# Automatically sync files between host and VM
+
+	vagrant rsync-auto
+
+^ this command watches all files in the host machine's top-level project directory (as specified by the `config.vm.synced_folder` line in the `Vagrantfile`)
+
+if a change is made, an automatic rsync will update files in the VM's `/vagrant/` directory, thus ensuring that both directories (the host machine's and the VM's) contain the same content.
+
+`vagrant rsync` can be used for a one-off file sync
 
 # Resources
 

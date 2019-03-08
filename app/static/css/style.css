@@ -7,6 +7,11 @@ body {
   min-height: 100vh;
 }
 
+#app {
+  position: absolute;
+  top: 8%;
+}
+
 h1 {
   text-align: center;
 }
@@ -62,6 +67,10 @@ canvas#mnist {
   margin-left: 50px;
 }
 
+canvas#original {
+  border: 4px solid black;
+}
+
 button {
   cursor: pointer;
 }
@@ -70,7 +79,8 @@ button:focus {
 }
 
 #clearButton {
-  margin-left: -444px;
+  margin-top: 7px;
+  margin-left: 20%;
 }
 
 /* the following button style was lifted from:

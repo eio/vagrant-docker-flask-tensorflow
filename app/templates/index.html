@@ -5,40 +5,41 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
     </head>
     <body>
-        <script type="text/javascript" src="{{ url_for('static', filename='js/predict.js') }}"></script>
-        <h1>tensorflow neural network model:
-            <span style='font-size:80%;'>
-                classify hand-drawn numbers
-            </span>
-        </h1>
-        <p>Draw a single number in the box on the left:
-            <br>0, 1, 2, 3, 4, 5, 6, 7, 8, or 9.
-            <br>
-            <br>then click the Predict button.
-        </p>
-        <div class="items">
-            <div class="items__item">
-                <canvas id="original" width="100px" height="200px"></canvas>
-                <div class="items__item__label">Canvas Input</div>
-            </div>
-            <div class="items__arrow"></div>
-            <div class="items__item">
-                <canvas id="bounded" width="100px" height="100px"></canvas>
-                <div class="items__item__label">Segmented</div>
-            </div>
-            <div class="items__arrow"></div>
-            <div class="items__item items__item--mnist">
-                <canvas id="mnist" width="28px" height="28px"></canvas>
-                <div class="items__item__label">MNIST Input</div>
+        <div id='app'>
+            <script type="text/javascript" src="{{ url_for('static', filename='js/predict.js') }}"></script>
+            <h1 style='margin-left: -20px; margin-bottom: 30px;'><sup style='font-size:50%;'>(TensorFlow)</sup> neural network model:
+                <sub style='font-size:80%;'>
+                    <i>classify hand-drawn numbers</i>
+                </sub>
+            </h1>
+            <p>Draw a single number in the box on the left:
+                <br>0, 1, 2, 3, 4, 5, 6, 7, 8, or 9
                 <br>
-                <div class="wrap">
-                  <button class="button" onclick="requestPrediction()">Predict</button>
+                <br>then click the Predict button.
+            </p>
+            <div class="items">
+                <div class="items__item">
+                    <canvas id="original" width="100px" height="200px"></canvas>
+                    <div class="items__item__label">Canvas Input</div>
+                    <button id="clearButton" type="button" onclick="sketcher.clear()">Clear</button>
+                </div>
+                <div class="items__arrow"></div>
+                <div class="items__item">
+                    <canvas id="bounded" width="100px" height="100px"></canvas>
+                    <div class="items__item__label">[ segmented ]</div>
+                </div>
+                <div class="items__arrow"></div>
+                <div class="items__item items__item--mnist">
+                    <canvas id="mnist" width="28px" height="28px"></canvas>
+                    <div class="items__item__label">MNIST Input</div>
+                    <br>
+                    <div class="wrap">
+                      <button class="button" onclick="requestPrediction()">Predict</button>
+                    </div>
                 </div>
             </div>
+            <!-- canvas sketchpad code -->
+            <script type="text/javascript" src="{{ url_for('static', filename='js/mnist-canvas.js') }}"></script>
         </div>
-        <!-- canvas sketchpad code -->
-        <script type="text/javascript" src="{{ url_for('static', filename='js/mnist-canvas.js') }}"></script>
-        <!-- clear canvas button -->
-        <button id="clearButton" type="button" onclick="sketcher.clear()">Clear</button>
     </body>
 </html>
