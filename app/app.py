@@ -3,16 +3,12 @@ from __future__ import absolute_import, division, print_function
 import tensorflow as tf
 from tensorflow import keras
 from flask import Flask, request, redirect, jsonify, render_template
-from jinja2 import TemplateNotFound
 import os
 import base64
 import numpy as np
 # import matplotlib.pyplot as plt
 import redis
 import time
-
-from flask import Blueprint, render_template, abort
-from jinja2 import TemplateNotFound
 
 # declare constants
 HOST = '0.0.0.0'
