@@ -75,3 +75,6 @@ https://colab.research.google.com/github/tensorflow/docs/blob/master/site/en/tut
 
 ### User-drawn MNIST images
 https://codepen.io/MaciejCaputa/pen/KXbJWR
+
+### Deep Convolutional Generative Adversarial Networks with TensorFlow
+https://github.com/dmonn/dcgan-oreilly/blob/master/DCGANs%20with%20Tensorflow.ipynb
