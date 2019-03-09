@@ -19,9 +19,9 @@ Install Vagrant plugins:
 
 Test POSTs:
 
-	./scripts/curl_post_zero.sh
+	./scripts/post_zero.sh
 
-	./scripts/curl_post_three.sh
+	./scripts/post_three.sh
 
 Test GET index in browser:
 
