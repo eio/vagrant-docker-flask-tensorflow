@@ -160,9 +160,11 @@ model = create_model()
 # # train the model, saving with our checkpoint callback
 # model.fit(train_images, train_labels, epochs=10, callbacks=[cp_callback])
 # train the model
-model.fit(train_images, train_labels, epochs=10)
+epochs = 10
+model.fit(train_images, train_labels, epochs=epochs)
 # Save entire model to a HDF5 file
-model.save('models/mnist_model.h5')
+model_path = 'models/{}epochs_mnist_model.h5'.format(epochs)
+model.save(model_path)
 
 # evaluate accuracy
 loss, acc = model.evaluate(test_images, test_labels)
@@ -175,7 +177,7 @@ print("Newly trained model, accuracy: {:5.2f}%".format(100*acc))
 ######################
 
 # Recreate the exact same model, including weights and optimizer.
-model = keras.models.load_model('models/mnist_model.h5')
+model = keras.models.load_model(model_path)
 # model.summary()
 
 # evaluate accuracy of loaded model

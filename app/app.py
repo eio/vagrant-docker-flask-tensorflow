@@ -16,7 +16,7 @@ PORT = 8081
 REDIS_PORT = 6379
 CLASS_NAMES = ['0','1','2','3','4','5','6','7','8','9']
 HERE = os.path.dirname(os.path.abspath(__file__))
-MNIST_MODEL_FILEPATH = '{}/../models/mnist_model.h5'.format(HERE)
+MNIST_MODEL_FILEPATH = '{}/../models/100epochs_mnist_model.h5'.format(HERE)
 
 # initialize flask application
 app = Flask(__name__)
