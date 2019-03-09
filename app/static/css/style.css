@@ -1,5 +1,5 @@
 body {
-  background: #FAFAFA;
+  background: #D3D3D3;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -61,6 +61,7 @@ p {
 
 canvas {
   border: 1px solid black;
+  background: #fff;
 }
 
 canvas#mnist {
