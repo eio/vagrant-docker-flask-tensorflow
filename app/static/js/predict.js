@@ -19,6 +19,12 @@ var getGrayscaleArray = function() {
     return new Uint8Array(gsarr);
 };
 
+var buildOutput = function(resp, num_epochs) {
+    var output = document.getElementById(num_epochs);
+    var data = resp[num_epochs];
+    output.innerHTML = data['confidence'] + ' sure<br> that you drew<br> the number ' + data['prediction'];
+};
+
 var requestPrediction = function() {
     var endpoint = 'http://192.168.188.110:8081/api/predict';
     var gsarr = getGrayscaleArray();
@@ -30,9 +36,13 @@ var requestPrediction = function() {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
             var resp = JSON.parse(xhr.response);
-            console.log('Prediction:', resp)
+            console.log('Predictions:', resp);
+            buildOutput(resp, '10_epochs');
+            buildOutput(resp, '100_epochs');
+            buildOutput(resp, '1000_epochs');
             // resp == { 'prediction': X, 'confidence': Y }
-            alert('skynet is ' + resp['confidence'] + ' sure that you drew the number ' + resp['prediction']);
+            // var bestguess = resp['1000_epochs']
+            // alert('skynet is ' + bestguess['confidence'] + ' sure that you drew the number ' + bestguess['prediction']);
         }
     }
     xhr.open('POST', endpoint, true);

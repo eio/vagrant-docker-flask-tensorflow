@@ -15,7 +15,7 @@
             <p>Draw a single number in the box on the left:
                 <br>0, 1, 2, 3, 4, 5, 6, 7, 8, or 9
                 <br>
-                <br>then click the Predict button.
+                <br>then click the Submit button.
             </p>
             <div class="items">
                 <div class="items__item">
@@ -34,8 +34,23 @@
                     <div class="items__item__label">MNIST Input</div>
                     <br>
                     <div class="wrap">
-                      <button class="button" onclick="requestPrediction()">Predict</button>
+                      <button class="button" onclick="requestPrediction()">Submit</button>
                     </div>
+                </div>
+            </div>
+            <h1>Results</h1>
+            <div id="predictions" class="items">
+                <div class="items__item">
+                    <div id="10_epochs" class="result" width="100px" height="100px"></div>
+                    <div class="items__item__label">10 Epochs</div>
+                </div>
+                <div class="items__item">
+                    <div id="100_epochs" class="result" width="100px" height="100px"></div>
+                    <div class="items__item__label">100 Epochs</div>
+                </div>
+                <div class="items__item items__item--mnist">
+                    <div id="1000_epochs" class="result" width="100px" height="100px"></div>
+                    <div class="items__item__label">1000 Epochs</div>
                 </div>
             </div>
             <!-- canvas sketchpad code -->

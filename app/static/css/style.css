@@ -59,7 +59,13 @@ p {
   text-align: center;
 }
 
-canvas {
+.result {
+  min-width: 85px;
+  min-height: 85px;
+  padding: 15px;
+}
+
+canvas, .result {
   border: 1px solid black;
   background: #fff;
 }
