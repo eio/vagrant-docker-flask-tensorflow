@@ -1,3 +1,25 @@
+# About
+
+This project uses Vagrant to spin up a virtual machine running Debian.
+
+It provisions that Debian VM with Docker.
+
+The Debian VM then creates a Debian Docker image which serves a simple website and REST API via the Flask framework for Python.
+
+The website allows users to draw a digit on an HTML canvas.
+
+The website then scales the hand-drawn digit to the size of images from the MNIST dataset of hand-drawn digits.
+
+The scaled image is then base64-encoded and sent to the server to be checked against a neural network model which was previously trained against the MNIST dataset of hand-drawn digits.
+
+The server responds with JSON data containing a prediction and confidence level:
+
+```
+{ 'prediction': '4', 'confidence': '80%' }
+```
+
+The website informs the user of the results.
+
 # Setup
 
 Install VirtualBox: https://www.virtualbox.org
