@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>DigitPredictor</title>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
     </head>
     <body>
@@ -53,6 +54,25 @@
                     <div class="items__item__label">1000 Epochs</div>
                 </div>
             </div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Address</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.city }}</td>
+                    <td>{{ student.addr }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
             <!-- canvas sketchpad code -->
             <script type="text/javascript" src="{{ url_for('static', filename='js/mnist-canvas.js') }}"></script>
         </div>

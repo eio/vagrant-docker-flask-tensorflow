@@ -1,5 +1,9 @@
 tensorflow
 numpy
 matplotlib
-flask
 redis
+flask
+flask-sqlalchemy
+psycopg2
+requests
+python-dotenv

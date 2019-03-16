@@ -7,21 +7,66 @@ import os
 import base64
 import numpy as np
 # import matplotlib.pyplot as plt
+from flask_sqlalchemy import SQLAlchemy
 import redis
 import time
+from dotenv import load_dotenv
+load_dotenv()
+
 
 # declare constants
 HOST = '0.0.0.0'
-PORT = 8081
+APP_PORT = 8081
 REDIS_PORT = 6379
 CLASS_NAMES = ['0','1','2','3','4','5','6','7','8','9']
 HERE = os.path.dirname(os.path.abspath(__file__))
+DBHOST = 'postgres'
+DBPORT = 5432
+DBUSER = os.getenv("POSTGRES_USER")
+DBPASS = os.getenv("POSTGRES_PASSWORD")
+DBNAME = os.getenv("POSTGRES_DB")
 
 # initialize flask application
 app = Flask(__name__)
 
 # initialize redis store
 cache = redis.Redis(host='redis', port=REDIS_PORT)
+
+# initialize postgresql db
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://{user}:{password}@{host}:{port}/{db}'.format(
+    user=DBUSER,
+    password=DBPASS,
+    host=DBHOST,
+    port=DBPORT,
+    db=DBNAME
+)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = DBPASS
+
+db = SQLAlchemy(app)
+
+class students(db.Model):
+    id = db.Column('student_id', db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    city = db.Column(db.String(50))
+    addr = db.Column(db.String(200))
+
+    def __init__(self, name, city, addr):
+        self.name = name
+        self.city = city
+        self.addr = addr
+
+def database_initialization_sequence():
+    # db.create_all()
+    test_rec = students(
+        'Daffy Duck',
+        'New Amsterdam',
+        '1 Infinite Spiral'
+    )
+    db.session.add(test_rec)
+    db.session.rollback()
+    db.session.commit()
+    print("Test record added.")
 
 def get_hit_count():
     retries = 5
@@ -67,7 +112,7 @@ def predict_digit(mnist_model_filepath):
 def hello():
     count = get_hit_count()
     print('Hi my log I have been seen {} times.'.format(count))
-    return render_template('index.html')
+    return render_template('index.html', students=students.query.all())
 
 @app.route('/api/predict', methods=['POST'])
 def classify():
@@ -81,10 +126,22 @@ def classify():
     })
 
 if __name__ == '__main__':
+
+    # setup postgres
+    dbstatus = False
+    while dbstatus == False:
+        try:
+            db.create_all()
+        except:
+            time.sleep(2)
+        else:
+            dbstatus = True
+    database_initialization_sequence()
+
     # run web server
     app.run(
         host=HOST,
-        port=PORT,
+        port=APP_PORT,
         # automatic reloading enabled
         debug=True
     )
