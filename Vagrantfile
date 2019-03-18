@@ -22,6 +22,8 @@ Vagrant.configure(2) do |config|
   # config.vm.box = "hashicorp/precise64"
   # config.vm.box = "ubuntu/trusty64"
 
+  config.vm.define "ellwood-glacier"
+
   # access a port on your host machine (via localhost) and have all data forwarded to a port on the guest machine.
   # config.vm.network "forwarded_port", guest: 9092, host: 9092
 
@@ -33,7 +35,7 @@ Vagrant.configure(2) do |config|
   config.disksize.size = '50GB'
   
   config.vm.provider "virtualbox" do |vb|
-    vb.name = 'docker-compose-vm'
+    vb.name = "ellwood-glacier" # virtualbox GUI name
     vb.memory = 4096
     vb.cpus = 1
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
