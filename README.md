@@ -41,9 +41,9 @@ Install Vagrant plugins:
 
 Test POSTs:
 
-	./scripts/post_zero.sh
+	./scripts/test_post_zero.sh
 
-	./scripts/post_three.sh
+	./scripts/test_post_three.sh
 
 Test GET index in browser:
 
@@ -57,7 +57,7 @@ List running Docker containers from the VM:
 Maybe get shell on a container through the VM:
 
 	vagrant ssh
-	scripts/shelldock.sh $CONTAINER_ID
+	scripts/bash_docker.sh $CONTAINER_ID
 
 # Automatically sync files between host and VM
 
