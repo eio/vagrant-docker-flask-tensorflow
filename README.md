@@ -1,3 +1,5 @@
+![appgif](./doc/app.gif)
+
 # About
 
 This project uses Vagrant to spin up a virtual machine running Debian.
